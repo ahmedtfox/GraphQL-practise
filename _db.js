@@ -25,5 +25,7 @@ const reviews = [
   { id: "7", rating: 10, content: "lorem ipsum", author_id: "3", game_id: "1" },
 ];
 
+const db = { games, authors, reviews };
+
 // Exporting data
-module.exports = { games, authors, reviews };
+export default db;
