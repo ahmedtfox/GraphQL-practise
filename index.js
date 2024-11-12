@@ -33,6 +33,30 @@ const resolvers = {
       });
     },
   },
+  Game: {
+    reviews(parent) {
+      return db.reviews.filter((r) => {
+        return r.game_id === parent.id;
+      });
+    },
+  },
+  Author: {
+    reviews(parent) {
+      return db.reviews.filter((r) => {
+        return r.game_id === parent.id;
+      });
+    },
+  },
+  Review: {
+    author(parent) {
+      return db.authors.find((a) => {
+        return parent.author_id === a.id;
+      });
+    },
+    game(parent) {
+      return db.games.find((g) => parent.game_id === g.id);
+    },
+  },
 };
 
 // setup server
