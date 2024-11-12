@@ -57,6 +57,28 @@ const resolvers = {
       return db.games.find((g) => parent.game_id === g.id);
     },
   },
+  Mutation: {
+    deleteGame(_, args) {
+      db.games = db.games.filter((g) => g.id !== args.id);
+      return db.games;
+    },
+    addGame(_, args) {
+      let generatedID;
+      for (let i = 1; i < db.games.length + 2; i++) {
+        const gg = db.games.find((g) => +g.id === i);
+        if (!gg) {
+          generatedID = i.toString();
+          break; // Stop the loop as soon as we find an available ID
+        }
+      }
+      let game = {
+        id: generatedID,
+        ...args.game,
+      };
+      db.games.push(game);
+      return game;
+    },
+  },
 };
 
 // setup server
